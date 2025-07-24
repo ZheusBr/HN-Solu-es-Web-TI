@@ -449,7 +449,40 @@
             });
         });
 
-        // Simple form validation would go here if we had a form
-    </script>
+<script>
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+<!-- Modal de Imagem -->
+<div id="modal-restaurante" class="modal" onclick="closeModal('restaurante')">
+  <span class="close" onclick="closeModal('restaurante')">&times;</span>
+  <img class="modal-content" id="modal-img-restaurante" />
+</div>
+
+<!-- Script do Modal -->
+<script>
+  function openModal(id) {
+    const modal = document.getElementById(`modal-${id}`);
+    const img = document.querySelector(`img[onclick="openModal('${id}')"]`);
+    const modalImg = document.getElementById(`modal-img-${id}`);
+
+    modal.style.display = "block";
+    modalImg.src = img.src;
+  }
+
+  function closeModal(id) {
+    const modal = document.getElementById(`modal-${id}`);
+    modal.style.display = "none";
+  }
+</script>
+
 </body>
 </html>
