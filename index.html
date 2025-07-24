@@ -24,18 +24,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        <body>
-  <header>
-  <div class="container">
-    <img src="logo-hn.png" alt="Logo HN Soluções Web & TI" class="logo" />
-    <nav class="menu">
-      <a href="#">Home</a>
-      <a href="#">Portfólio</a>
-      <a href="#">Produtos</a>
-      <a href="#">Contato</a>
-    </nav>
-  </div>
-</header>
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+        }
 
         /* Header */
         header {
@@ -56,24 +48,6 @@
             font-weight: bold;
             text-decoration: none;
         }
-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .menu a {
-  margin-left: 2rem;
-  text-decoration: none;
-  color: var(--text-blue);
-  font-weight: bold;
-  font-size: 1rem;
-  transition: color 0.2s;
-}
-
-header .menu a:hover {
-  color: var(--text-gold);
-}
 
         nav ul {
             display: flex;
