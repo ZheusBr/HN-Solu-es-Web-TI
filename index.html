@@ -1,211 +1,561 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HN Portfólio</title>
-  <style>
-    :root {
-      --bg-dark: #0d0d0d;
-      --primary-color: #007bff;
-      --gold: #FFD700;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HN Soluções Web & TI</title>
+    <style>
+        :root {
+            --primary: #0F0F0F;
+            --secondary: #181818;
+            --gold: #D4AF37;
+            --blue: #1D4ED8;
+            --light-blue: #3B82F6;
+            --light-gray: #D1D5DB;
+            --dark-gray: #374151;
+            --white: #FFFFFF;
+            --black: #000000;
+            --graphite: #333333;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    body {
-      background-color: var(--bg-dark);
-      color: white;
-    }
+        body {
+            background-color: var(--primary);
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
 
-    header {
-      background-color: var(--bg-dark);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #333;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        header {
+            background-color: var(--primary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: var(--gold);
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: bold;
-    }
+        .logo {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-    nav a:hover {
-      color: var(--primary-color);
-    }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
 
-    .hero {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
+        .nav-links a {
+            color: var(--light-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
 
-    .hero h1 {
-      font-size: 48px;
-      color: var(--gold);
-    }
+        .nav-links a:hover {
+            color: var(--white);
+        }
 
-    .hero p {
-      font-size: 18px;
-      color: #ccc;
-    }
+        .btn {
+            background-color: var(--blue);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
 
-    .portfolio {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
+        .btn:hover {
+            background-color: var(--light-blue);
+        }
 
-    .portfolio-item {
-      position: relative;
-      cursor: pointer;
-    }
+        .hero {
+            background-color: var(--primary);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
 
-    .portfolio-img {
-      width: 100%;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    .portfolio-img:hover {
-      opacity: 0.8;
-    }
+        .hero h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
 
-    .portfolio-overlay {
-      position: absolute;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      width: 100%;
-      padding: 1rem;
-      border-radius: 0 0 8px 8px;
-    }
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.9);
-    }
+        section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .modal-content {
-      margin: auto;
-      display: block;
-      max-width: 80%;
-    }
+        .section-title {
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
 
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #777;
-    }
-  </style>
+        .card {
+            background-color: var(--secondary);
+            border: 1px solid var(--dark-gray);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+        }
+
+        .gallery-content iframe, 
+        .gallery-content img {
+            max-width: 100%;
+            max-height: 80vh;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .prev-btn, 
+        .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 50%;
+            user-select: none;
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light-gray);
+            background-color: var(--graphite);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--dark-gray);
+        }
+
+        footer {
+            background-color: var(--graphite);
+            color: var(--light-gray);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="#" class="logo">HN Soluções</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#products">Produtos</a>
+                <a href="#contact">Contato</a>
+            </div>
+        </nav>
+    </header>
 
-  <header>
-    <div class="logo">HN</div>
-    <nav>
-      <a href="#portfolio">Portfólio</a>
-      <a href="#contato">Contato</a>
-    </nav>
-  </header>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <!-- SUBSTITUA A IMAGEM ABAIXO PELA SUA FOTO/LOGO -->
+                <div class="card-image" style="max-width: 300px; margin: 0 auto 2rem;">
+                    <img src="https://placehold.co/600x400" alt="Foto profissional de [Seu Nome], fundo neutro, sorrindo, vestindo roupa social" />
+                </div>
+                <h1>HN Soluções Web & TI</h1>
+                <p>
+                    A HN Soluções nasceu como uma maneira de transformar desafios em oportunidades. 
+                    Quando precisei me afastar do trabalho convencional, encontrei no digital 
+                    uma forma poderosa de ajudar minha família e continuar contribuindo. 
+                    Especializados em desenvolvimento web e soluções de TI, oferecemos serviços 
+                    que impulsionam negócios no mundo digital.
+                </p>
+                <a href="#contact" class="btn">Fale Conosco</a>
+            </div>
+        </section>
 
-  <section class="hero">
-    <h1>Criação de Sites e Suporte Técnico</h1>
-    <p>Formatação, troca de Windows, desbloqueio de PC e mais!</p>
-  </section>
+        <section id="portfolio">
+            <h2 class="section-title">Nosso Portfólio</h2>
+            <div class="cards-container">
+                <!-- ADICIONE SEUS PROJETOS ABAIXO -->
+                <!-- COPIAR O BLOCO .card PARA CADA NOVO PROJETO -->
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO SEU PROJETO 1 -->
+                        <img src="https://placehold.co/600x400" alt="Site de e-commerce com design moderno em tons de azul, layout responsivo" onclick="openGallery('project1')" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Site de E-commerce</h3>
+                        <p>Plataforma completa para vendas online com integração de pagamentos e gestão de estoque.</p>
+                        <a href="#" class="btn" onclick="openGallery('project1')">Ver Mais</a>
+                    </div>
+                </div>
 
-  <section id="portfolio" class="portfolio">
-    <!-- Imagem 1 -->
-    <div class="portfolio-item">
-      <img src="site feito.jpg" alt="Projeto Restaurante" class="portfolio-img" onclick="openModal('restaurante')">
-      <div class="portfolio-overlay">
-        <h3>Website para Restaurante</h3>
-        <p>Site completo com sistema de reservas online</p>
-      </div>
-    </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO SEU PROJETO 2 -->
+                        <img src="https://placehold.co/600x400" alt="Dashboard de análise de dados com gráficos e métricas em tempo real" onclick="openGallery('project2')" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Sistema de Análise de Dados</h3>
+                        <p>Dashboard interativo para visualização e análise de dados empresariais em tempo real.</p>
+                        <a href="#" class="btn" onclick="openGallery('project2')">Ver Mais</a>
+                    </div>
+                </div>
 
-    <!-- Imagem 2 -->
-    <div class="portfolio-item">
-      <img src="a61403fa-d1b3-4c3b-831b-578faa6c54d0.png" alt="Design Visual" class="portfolio-img" onclick="openModal('visual')">
-      <div class="portfolio-overlay">
-        <h3>Design Visual</h3>
-        <p>Identidade visual para loja online</p>
-      </div>
-    </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO SEU PROJETO 3 -->
+                        <img src="https://placehold.co/600x400" alt="Aplicativo mobile com interface limpa em tons claros, mostrando funcionalidades principais" onclick="openGallery('project3')" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Aplicativo Mobile</h3>
+                        <p>Solução mobile multiplataforma com funcionalidades offline e sincronização em nuvem.</p>
+                        <a href="#" class="btn" onclick="openGallery('project3')">Ver Mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Adicione mais itens seguindo esse padrão -->
-  </section>
+        <section id="products">
+            <h2 class="section-title">Produtos Recomendados</h2>
+            <div class="cards-container">
+                <!-- ADICIONE SEUS PRODUTOS AFILIADOS ABAIXO -->
+                <!-- COPIAR O BLOCO .card PARA CADA NOVO PRODUTO -->
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO PRODUTO 1 -->
+                        <img src="https://placehold.co/600x400" alt="Curso online de programação Web com certificação, capa moderna em tons de azul" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Curso Web Moderno</h3>
+                        <p>Aprenda desenvolvimento web do zero com tecnologias atuais e projetos práticos.</p>
+                        <a href="[LINK AFILIADO]" class="btn" target="_blank">Conhecer</a>
+                    </div>
+                </div>
 
-  <!-- Modal Restaurante -->
-  <div id="modal-restaurante" class="modal" onclick="closeModal('restaurante')">
-    <span class="close" onclick="closeModal('restaurante')">&times;</span>
-    <img class="modal-content" id="modal-img-restaurante">
-  </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO PRODUTO 2 -->
+                        <img src="https://placehold.co/600x400" alt="Pacote de templates para sites profissionais, mostrando vários layouts" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Templates Profissionais</h3>
+                        <p>Coleção de templates responsivos prontos para usar em diversos nichos.</p>
+                        <a href="[LINK AFILIADO]" class="btn" target="_blank">Conhecer</a>
+                    </div>
+                </div>
 
-  <!-- Modal Visual -->
-  <div id="modal-visual" class="modal" onclick="closeModal('visual')">
-    <span class="close" onclick="closeModal('visual')">&times;</span>
-    <img class="modal-content" id="modal-img-visual">
-  </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- SUBSTITUA COM IMAGEM DO PRODUTO 3 -->
+                        <img src="https://placehold.co/600x400" alt="Serviço de hospedagem premium com recursos avançados, logotipo moderno" />
+                    </div>
+                    <div class="card-content">
+                        <h3>Hospedagem Premium</h3>
+                        <p>Hospedagem de alto desempenho com suporte especializado e recursos avançados.</p>
+                        <a href="[LINK AFILIADO]" class="btn" target="_blank">Conhecer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <footer id="contato">
-    <p>Entre em contato pelo Instagram: @henrique.pg.suporte</p>
-    <p>WhatsApp: <a href="https://wa.me/SEUNUMERO" style="color: var(--gold); text-decoration: none;">Clique aqui</a></p>
-  </footer>
+        <section id="contact">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p>Tem um projeto em mente ou precisa de uma solução digital? Entre em contato conosco!</p>
+                
+                <div class="social-links">
+                    <!-- SUBSTITUA COM SEUS LINKS REAIS -->
+                    <a href="https://wa.me/[SEU_NUMERO_COMPLETO]" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382C17.007 14.382 16.594 14.257 16.241 14.009C15.82 14.209 14.91 14.651 14.129 14.899C13.241 15.185 12.315 15.079 11.402 14.738C10.044 14.228 8.945 13.328 8.213 12.131C7.628 11.161 7.308 10.055 7.308 8.898C7.308 8.312 7.416 7.741 7.626 7.2C7.817 6.909 7.851 6.538 7.734 6.197L6.807 3.594C6.683 3.231 6.363 2.965 5.977 2.924C4.052 2.714 2.569 4.141 2.569 6.009C2.569 7.139 3.004 8.26 3.813 9.219C4.561 10.104 6.001 11.587 7.933 12.785C10.787 14.53 13.31 14.887 15.156 14.953C15.656 14.97 16.132 14.934 16.567 14.841C18.014 14.52 19.143 13.324 19.341 11.936C19.476 10.923 18.72 10.013 17.708 10.013H16.932C16.554 10.013 16.243 9.739 16.217 9.364C16.184 8.868 16.595 8.442 17.091 8.442H17.944C19.159 8.442 20.141 9.389 20.065 10.589C19.816 13.227 17.682 15.269 15.039 15.635C13.039 15.896 10.343 15.519 7.314 13.611C5.233 12.318 3.701 10.712 2.884 9.719C1.943 8.571 1.416 7.227 1.416 5.878C1.416 3.329 3.438 1.369 5.984 1.632C6.659 1.698 7.264 1.932 7.746 2.307C8.659 3.024 9.027 4.211 8.703 5.344L9.54 7.596C9.598 7.753 9.595 7.929 9.538 8.085C9.39 8.493 9.328 8.927 9.328 9.365C9.328 10.213 9.556 11.041 9.999 11.762C10.563 12.676 11.426 13.386 12.462 13.783C13.111 14.027 13.779 14.106 14.392 13.898C15.173 13.637 16.115 13.19 16.796 12.729C17.319 12.954 17.912 13.064 18.527 13.018C19.086 12.976 19.612 12.79 20.065 12.495C20.789 12.017 21.128 11.191 20.921 10.406C21.684 10.641 22.278 11.28 22.373 12.106C22.524 13.402 21.682 14.578 20.385 14.738C19.794 14.824 18.843 14.871 17.88 14.594C17.759 14.558 17.619 14.527 17.475 14.501" fill="currentColor"/>
+                        </svg>
+                        WhatsApp
+                    </a>
+                    <a href="https://instagram.com/[SEU_USERNAME]" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 7.00336C9.23858 7.00336 7 9.24194 7 12.0034C7 14.7648 9.23858 17.0034 12 17.0034C14.7614 17.0034 17 14.7648 17 12.0034C17 9.24194 14.7614 7.00336 12 7.00336ZM12 15.0034C10.3431 15.0034 9 13.6602 9 12.0034C9 10.3465 10.3431 9.00336 12 9.00336C13.6569 9.00336 15 10.3465 15 12.0034C15 13.6602 13.6569 15.0034 12 15.0034Z" fill="currentColor"/>
+                            <path d="M16 5.33605C16.5523 5.33605 17 5.78376 17 6.33605C17 6.88833 16.5523 7.33605 16 7.33605C15.4477 7.33605 15 6.88833 15 6.33605C15 5.78376 15.4477 5.33605 16 5.33605Z" fill="currentColor"/>
+                            <path d="M18.1702 2.00336H5.8298C3.63233 2.00336 2 3.63459 2 5.82996V18.1703C2 20.3657 3.63233 22.0034 5.8298 22.0034H18.1702C20.3677 22.0034 22 20.3657 22 18.1768V5.82996C22 3.63459 20.3677 2.00336 18.1702 2.00336ZM20 18.1703C20 19.2569 19.2567 20.0034 18.1702 20.0034H5.8298C4.74328 20.0034 4 19.2569 4 18.1703V5.82996C4 4.74343 4.74328 4.00336 5.8298 4.00336H18.1702C19.2567 4.00336 20 4.74343 20 5.82996V18.1703Z" fill="currentColor"/>
+                        </svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
 
-  <script>
-    function openModal(id) {
-      const modal = document.getElementById(`modal-${id}`);
-      const img = document.querySelector(`img[onclick="openModal('${id}')"]`);
-      const modalImg = document.getElementById(`modal-img-${id}`);
+        <!-- GALERIA MODAL -->
+        <div id="galleryModal" class="gallery-overlay">
+            <div class="gallery-content">
+                <span class="close-btn" onclick="closeGallery()">&times;</span>
+                <span class="prev-btn" onclick="prevItem()">&#10094;</span>
+                <span class="next-btn" onclick="nextItem()">&#10095;</span>
+                <div id="galleryItem"></div>
+            </div>
+        </div>
+    </main>
 
-      if (modal && img && modalImg) {
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      }
-    }
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#products">Produtos</a>
+                <a href="#contact">Contato</a>
+            </div>
+            <p>HN Soluções Web & TI &copy; <span id="year"></span> - Todos os direitos reservados</p>
+        </div>
+    </footer>
 
-    function closeModal(id) {
-      const modal = document.getElementById(`modal-${id}`);
-      if (modal) modal.style.display = "none";
-    }
-  </script>
+    <script>
+        // Galeria de imagens
+        const galleries = {
+            project1: [
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Tela inicial do site de e-commerce com destaque para banners promocionais' },
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Página de produto com galeria de imagens e descrição detalhada' },
+                { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' } // Substitua com seu vídeo
+            ],
+            project2: [
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Dashboard principal com gráficos de desempenho e métricas-chave' },
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Relatório detalhado com tabelas de dados exportáveis' },
+                { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' } // Substitua com seu vídeo
+            ],
+            project3: [
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Tela de login do aplicativo com design moderno e intuitivo' },
+                { type: 'image', src: 'https://placehold.co/800x600', alt: 'Funcionalidades principais do app demonstrando fluxo de uso' },
+                { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' } // Substitua com seu vídeo
+            ]
+        };
 
+        let currentGallery = '';
+        let currentIndex = 0;
+
+        function openGallery(galleryId) {
+            currentGallery = galleryId;
+            currentIndex = 0;
+            showItem(currentIndex);
+            document.getElementById('galleryModal').style.display = 'flex';
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').style.display = 'none';
+        }
+
+        function showItem(index) {
+            const galleryItem = document.getElementById('galleryItem');
+            const item = galleries[currentGallery][index];
+            
+            galleryItem.innerHTML = '';
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.alt;
+                img.style.maxHeight = '80vh';
+                img.style.maxWidth = '100%';
+                galleryItem.appendChild(img);
+            } else if (item.type === 'video') {
+                const iframe = document.createElement('iframe');
+                iframe.src = item.src;
+                iframe.width = '800';
+                iframe.height = '450';
+                iframe.frameBorder = '0';
+                iframe.allowFullscreen = true;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                galleryItem.appendChild(iframe);
+            }
+        }
+
+        function prevItem() {
+            currentIndex = (currentIndex - 1 + galleries[currentGallery].length) % galleries[currentGallery].length;
+            showItem(currentIndex);
+        }
+
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % galleries[currentGallery].length;
+            showItem(currentIndex);
+        }
+
+        // Fechar galeria ao clicar fora
+        document.getElementById('galleryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGallery();
+            }
+        });
+
+        // Ano atual no footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Suavizar scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
