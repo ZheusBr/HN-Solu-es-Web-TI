@@ -5,29 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HN Soluções Web & TI</title>
     <style>
-        :root {
-            --bg-dark: #0F0F0F;
-            --text-gold: #D4AF37;
-            --text-blue: #1D4ED8;
-            --button-blue: #1D4ED8;
-            --button-text: white;
-            --card-bg: #181818;
-            --card-border: #2D2D2D;
-            --footer-bg: #121212;
-            --footer-text: #A0A0A0;
-        }
+  :root {
+    --bg-dark: #0F0F0F;
+    --text-gold: #D4AF37;
+    --text-blue: #1D4ED8;
+    --button-blue: #1D4ED8;
+    --button-text: white;
+    --card-bg: #181818;
+    --card-border: #2D2D2D;
+    --footer-bg: #121212;
+    --footer-text: #A0A0A0;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+  }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-        }
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+  }
+
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+</style>
+body {
+  background-color: var(--bg-dark);
+  color: white;
+}
 
         /* Header */
         header {
