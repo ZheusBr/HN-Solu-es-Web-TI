@@ -1,519 +1,211 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HN Soluções Web & TI</title>
-    <style>
-  :root {
-    --bg-dark: #0F0F0F;
-    --text-gold: #D4AF37;
-    --text-blue: #1D4ED8;
-    --button-blue: #1D4ED8;
-    --button-text: white;
-    --card-bg: #181818;
-    --card-border: #2D2D2D;
-    --footer-bg: #121212;
-    --footer-text: #A0A0A0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HN Portfólio</title>
+  <style>
+    :root {
+      --bg-dark: #0d0d0d;
+      --primary-color: #007bff;
+      --gold: #FFD700;
+    }
 
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    padding-top: 60px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-  .modal-content {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-  }
+    body {
+      background-color: var(--bg-dark);
+      color: white;
+    }
 
-  .close {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+    header {
+      background-color: var(--bg-dark);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-</style>
-body {
-  background-color: var(--bg-dark);
-  color: white;
-}
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--gold);
+    }
 
-        /* Header */
-        header {
-            background-color: var(--bg-dark);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
 
-        .logo {
-            color: var(--text-gold);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
+    nav a:hover {
+      color: var(--primary-color);
+    }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-        nav ul li a {
-            color: var(--text-blue);
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
+    .hero h1 {
+      font-size: 48px;
+      color: var(--gold);
+    }
 
-        nav ul li a:hover {
-            opacity: 0.8;
-        }
+    .hero p {
+      font-size: 18px;
+      color: #ccc;
+    }
 
-        /* Hero Section */
-        .hero {
-            padding: 4rem 2rem;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .portfolio {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .hero h1 {
-            color: var(--text-gold);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+    .portfolio-item {
+      position: relative;
+      cursor: pointer;
+    }
 
-        .hero p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .portfolio-img {
+      width: 100%;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
 
-        .btn {
-            background-color: var(--button-blue);
-            color: var(--button-text);
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
+    .portfolio-img:hover {
+      opacity: 0.8;
+    }
 
-        .btn:hover {
-            background-color: #1a3eb1;
-        }
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 0 0 8px 8px;
+    }
 
-        /* Cards Section */
-        .section-title {
-            color: var(--text-gold);
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            padding-top: 3rem;
-        }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
 
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.3s;
-        }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--text-gold);
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            height: 250px;
-            background-color: var(--card-bg);
-        }
-
-        /* OBSERVAÇÃO: Substitua a imagem de placeholder abaixo pela imagem do seu portfólio */
-        .portfolio-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .portfolio-img:hover {
-            transform: scale(1.05);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
-            color: white;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            transform: translateY(0);
-        }
-
-        /* Products Section */
-        .products {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-        }
-
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* OBSERVAÇÃO: Substitua a imagem de placeholder abaixo pelos produtos que você recomenda */
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h3 {
-            color: var(--text-gold);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            background-color: var(--text-blue);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.1);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .footer-links a {
-            color: var(--footer-text);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: center;
-            }
-
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">HN Soluções</a>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#products">Produtos</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <!-- Home Section -->
-        <section id="home" class="hero">
-            <!-- OBSERVAÇÃO: Substitua a imagem de placeholder abaixo pela imagem da sua empresa/logo -->
-            <img src="logo_hn_300x150.png"
-     alt="Logo HN Soluções Web & TI – design moderno com elementos digitais e cores douradas"
-     style="margin-bottom: 2rem; width: 200px; height: auto; display: block; margin-left: auto; margin-right: auto;" />
-            
-            <h1>HN Soluções Web & TI</h1>
-            <p>Eu criei a HN Soluções Web & TI após me afastar do trabalho convencional, buscando uma maneira de ajudar minha família através do mundo digital. Com habilidades em desenvolvimento web e soluções de TI, encontrei uma forma de transformar desafios em oportunidades, criando soluções digitais que fazem a diferença na vida das pessoas.</p>
-            <a href="#contact" class="btn">Fale Conosco</a>
-        </section>
+  <header>
+    <div class="logo">HN</div>
+    <nav>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio">
-            <h2 class="section-title">Nosso Portfólio</h2>
-            <div class="portfolio">
-                <div class="portfolio-grid">
-                    <!-- OBSERVAÇÃO: Adicione seus projetos do portfólio aqui, substituindo os placeholders -->
-                    <div class="portfolio-item">
-                        <img src="https://placehold.co/600x400" alt="Projeto de website para restaurante - Design responsivo com galeria de fotos e cardápio digital" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <h3>Website para Restaurante</h3>
-                            <p>Site completo com sistema de reservas online</p>
-                        </div>
-                    </div>
-                   <div class="portfolio-item">
-  <img src="site feito.jpg" alt="Projeto Restaurante" onclick="openModal('restaurante')">
-  <div class="portfolio-overlay">
-    <h3>Website para Restaurante</h3>
-    <p>Site completo com sistema de reservas online</p>
+  <section class="hero">
+    <h1>Criação de Sites e Suporte Técnico</h1>
+    <p>Formatação, troca de Windows, desbloqueio de PC e mais!</p>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <!-- Imagem 1 -->
+    <div class="portfolio-item">
+      <img src="site feito.jpg" alt="Projeto Restaurante" class="portfolio-img" onclick="openModal('restaurante')">
+      <div class="portfolio-overlay">
+        <h3>Website para Restaurante</h3>
+        <p>Site completo com sistema de reservas online</p>
+      </div>
+    </div>
+
+    <!-- Imagem 2 -->
+    <div class="portfolio-item">
+      <img src="a61403fa-d1b3-4c3b-831b-578faa6c54d0.png" alt="Design Visual" class="portfolio-img" onclick="openModal('visual')">
+      <div class="portfolio-overlay">
+        <h3>Design Visual</h3>
+        <p>Identidade visual para loja online</p>
+      </div>
+    </div>
+
+    <!-- Adicione mais itens seguindo esse padrão -->
+  </section>
+
+  <!-- Modal Restaurante -->
+  <div id="modal-restaurante" class="modal" onclick="closeModal('restaurante')">
+    <span class="close" onclick="closeModal('restaurante')">&times;</span>
+    <img class="modal-content" id="modal-img-restaurante">
   </div>
-</div>
-                    <div class="portfolio-item">
-                        <img src="https://placehold.co/600x400" alt="Aplicativo mobile para delivery - Interface intuitiva com carrinho de compras e pagamento integrado" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <h3>Aplicativo Mobile</h3>
-                            <p>App de delivery para pequenos negócios</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Products Section -->
-        <section id="products">
-            <h2 class="section-title">Produtos Recomendados</h2>
-            <div class="products">
-                <div class="product-list">
-                    <!-- OBSERVAÇÃO: Adicione os produtos que você recomenda aqui, substituindo os placeholders -->
-                    <div class="product-card">
-                        <img src="https://placehold.co/600x400" alt="Curso de desenvolvimento web completo - Capa moderna com linguagens HTML, CSS e JavaScript" class="product-img" />
-                        <div class="product-info">
-                            <h3>Curso Web Completo</h3>
-                            <p>Aprenda a criar sites do zero com este curso completo.</p>
-                            <a href="#" class="btn" style="margin-top: 0.5rem;">Saiba Mais</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://placehold.co/600x400" alt="Ferramenta de SEO avançada - Dashboard profissional com análise de palavras-chave" class="product-img" />
-                        <div class="product-info">
-                            <h3>Ferramenta SEO</h3>
-                            <p>Otimize seu site para os motores de busca.</p>
-                            <a href="#" class="btn" style="margin-top: 0.5rem;">Saiba Mais</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://placehold.co/600x400" alt="Template profissional para loja virtual - Demonstração de e-commerce com produtos em destaque" class="product-img" />
-                        <div class="product-info">
-                            <h3>Template Loja Virtual</h3>
-                            <p>Comece sua loja online com este template profissional.</p>
-                            <a href="#" class="btn" style="margin-top: 0.5rem;">Saiba Mais</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- Modal Visual -->
+  <div id="modal-visual" class="modal" onclick="closeModal('visual')">
+    <span class="close" onclick="closeModal('visual')">&times;</span>
+    <img class="modal-content" id="modal-img-visual">
+  </div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <h2 class="section-title">Entre em Contato</h2>
-            <p>Tem um projeto em mente ou precisa de soluções digitais? Entre em contato conosco!</p>
-            
-            <!-- OBSERVAÇÃO: Substitua os dados abaixo pelos seus contatos reais -->
-            <div class="social-links">
-                <a href="https://wa.me/SEUNUMERODETELEFONE" aria-label="WhatsApp">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -8.209 2.1 -10.722c3.526 -2.513 8.38 -1.443 10.757 2.324c2.377 3.767 1.103 8.846 -3.078 11.214c-2.951 1.669 -5.577 1.55 -7.082 .197L3 20z"></path>
-                    </svg>
-                </a>
-                <a href="https://instagram.com/SEUINSTAGRAM" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
-            </div>
-        </section>
-    </main>
+  <footer id="contato">
+    <p>Entre em contato pelo Instagram: @henrique.pg.suporte</p>
+    <p>WhatsApp: <a href="https://wa.me/SEUNUMERO" style="color: var(--gold); text-decoration: none;">Clique aqui</a></p>
+  </footer>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2023 HN Soluções Web & TI. Todos os direitos reservados.</p>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#portfolio">Portfólio</a>
-                <a href="#products">Produtos</a>
-                <a href="#contact">Contato</a>
-            </div>
-        </div>
-    </footer>
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById(`modal-${id}`);
+      const img = document.querySelector(`img[onclick="openModal('${id}')"]`);
+      const modalImg = document.getElementById(`modal-img-${id}`);
 
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+      if (modal && img && modalImg) {
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      }
+    }
 
-<script>
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
-</script>
-
-<!-- Modal de Imagem -->
-<div id="modal-restaurante" class="modal" onclick="closeModal('restaurante')">
-  <span class="close" onclick="closeModal('restaurante')">&times;</span>
-  <img class="modal-content" id="modal-img-restaurante" />
-</div>
-
-<!-- Script do Modal -->
-<script>
-  function openModal(id) {
-    const modal = document.getElementById(`modal-${id}`);
-    const img = document.querySelector(`img[onclick="openModal('${id}')"]`);
-    const modalImg = document.getElementById(`modal-img-${id}`);
-
-    modal.style.display = "block";
-    modalImg.src = img.src;
-  }
-
-  function closeModal(id) {
-    const modal = document.getElementById(`modal-${id}`);
-    modal.style.display = "none";
-  }
-</script>
+    function closeModal(id) {
+      const modal = document.getElementById(`modal-${id}`);
+      if (modal) modal.style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
